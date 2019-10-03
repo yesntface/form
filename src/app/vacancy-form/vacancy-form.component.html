@@ -1,0 +1,17 @@
+<div style="width:50%;">
+  <form [formGroup]="vacancyForm" enctype="multipart/form-data" (ngSubmit)="onSubmit()" style='height:100%;'>
+    <input placeholder="title" formControlName="title">
+    <quill-editor formControlName="descript" [styles]="description" [modules]="conf"></quill-editor>
+    <quill-editor formControlName="smDescript" [styles]="smDescription" [modules]="conf" (onContentChanged)="limit($event)"></quill-editor>
+    <span><ng-container *ngIf="characters">{{limitOfChar-characters.length + 1}}</ng-container></span>
+    <input type="file" (change)="onChange($event.target.files, 0)" formControlName="imageM">
+    <input type="file" (change)="onChange($event.target.files, 1)" formControlName="imageD">
+    <input placeholder="Location" formControlName="location">
+    <br>
+    <input type="date" formControlName="startDate" value="{{getDate()}}" min="{{getDate()}}">
+    <br>
+    <input type="date" formControlName="endDate" value="{{getDate()}}" min="{{getDate().toString()}}">
+    <br>
+    <button class="btn btn-primary" [disabled]="!vacancyForm.valid">Submit</button>
+  </form>
+</div>
